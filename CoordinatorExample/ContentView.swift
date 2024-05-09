@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @State private var destinationViewStep = NavigationStep()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List {
+            Button("Sheet") {
+                destinationViewStep.present()
+            }
+            Button("Cover") {
+                destinationViewStep.cover()
+            }
+            Button("Link") {
+                destinationViewStep.push()
+            }
         }
-        .padding()
+        .navigationStep($destinationViewStep) {
+            print("dismissed")
+        } destination: {
+            DestinationView()
+        }
     }
 }
 
